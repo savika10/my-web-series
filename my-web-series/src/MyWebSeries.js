@@ -1,7 +1,5 @@
 import { LitElement, html, css } from 'lit';
 
-const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
-
 export class MyWebSeries extends LitElement {
   static get properties() {
     return {
@@ -163,6 +161,7 @@ class webSeriesOverview extends LitElement {
           grid-template-rows: repeat(6, minmax(0, 1fr));
         }
       }
+
       div {
         background-color: rgb(255, 255, 255);
         margin: 1rem 1rem;
@@ -174,7 +173,7 @@ class webSeriesOverview extends LitElement {
   }
   render() {
     return html`
-      <div id="Web-Series-list" class="card">
+      <div>
         <span>
           TITLE<br />
           director<br />
