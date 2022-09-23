@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@web/dev-server": "^0.1.34"
+  },
+  "dependencies": {
+    "@lion/core": "^0.24.0",
+    "@lion/tabs": "^0.13.1"
+  }
+}

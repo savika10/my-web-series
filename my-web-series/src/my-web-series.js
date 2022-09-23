@@ -1,3 +1,3 @@
 import { MyWebSeries } from './MyWebSeries.js';
 
-//customElements.define('my-web-series', MyWebSeries);
+window.customElements.define('my-web-series', MyWebSeries);

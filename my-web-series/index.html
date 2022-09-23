@@ -19,11 +19,6 @@
         background-image: radial-gradient(circle, #d6eaf8, #3498db);
       }
 
-      div.container {
-        display: flex;
-        flex-wrap: nowrap;
-      }
-
       h1 {
         text-transform: uppercase;
         text-align: center;
@@ -32,41 +27,31 @@
         color: #1b4f72;
         font-size: 60px;
         margin: 5px;
+  
         font-weight: lighter;
         text-shadow: 2px 2px 4px #1b4f72;
+        
       }
+      @media (max-width:800px) {
+       h1{ font-size: 40px;}
+        
+      } 
 
-      @media (max-width: 800px) {
-        div.container {
-          display: grid;
-          grid-template-columns: 1fr;
-          box-sizing: border-box;
-          gap: 1rem;
-        }
-
-        h1 {
-          font-size: 40px;
-        }
-      }
-    </style>
+      </style>
     <title>my-web-series</title>
   </head>
 
   <body>
-    <my-web-series>
-      <header>
-        <nav>
-          <h1>Web Series</h1>
-        </nav>
-      </header>
-
-      <div class="container">
-        <web-series-form> </web-series-form>
-
-        <web-series-overview> </web-series-overview>
-      </div>
-    </my-web-series>
-
-    <script type="module" src="./src/MyWebSeries.js"></script>
+    <header>
+      <nav>
+        <h1>Web Series</h1>
+      </nav>
+    </header>
+    
+      <my-web-series>
+        
+      </my-web-series>
+    </div>
+    <script type="module" src="./src/my-web-series.js"></script>
   </body>
 </html>
