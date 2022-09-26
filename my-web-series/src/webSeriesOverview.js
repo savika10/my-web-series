@@ -4,19 +4,25 @@ import { WebSeriesCard } from './web-series-card.js';
 window.customElements.define('web-series-card', WebSeriesCard);
 
 export class webSeriesOverview extends WebSeriesCard {
+  static get properties() {
+    return {
+      card: { type: Array },
+    };
+  }
+
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.card = [];
   }
 
   // adding values through attribute
-  connectedCallback() {
-    super.connectedCallback();
-    this.title = this.getAttribute('title');
-    this.director = this.getAttribute('director');
-    this.stars = this.getAttribute('stars');
-    this.streamingPlatform = this.getAttribute('streamingPlatform');
-  }
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   this.title = this.getAttribute('title');
+  //   this.director = this.getAttribute('director');
+  //   this.stars = this.getAttribute('stars');
+  //   this.streamingPlatform = this.getAttribute('streamingPlatform');
+  // }
 
   // adding styles
 
@@ -53,18 +59,16 @@ export class webSeriesOverview extends WebSeriesCard {
   // connecting values
   render() {
     return html`
-      <web-series-card
-        id="card"
-        title=${this.title}
-        director=${this.director}
-        stars=${this.stars}
-        streamingPlatform=${this.streamingPlatform}
-      ></web-series-card>
-      <web-series-card></web-series-card>
-      <web-series-card></web-series-card>
-      <web-series-card></web-series-card>
-      <web-series-card></web-series-card>
-      <web-series-card></web-series-card>
+      ${this.card.map(
+        item =>
+          html`<web-series-card
+            id="card"
+            title=${item.title}
+            director=${item.director}
+            stars=${item.stars}
+            streamingPlatform=${item.streamingPlatform}
+          ></web-series-card>`
+      )}
     `;
   }
 }

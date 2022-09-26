@@ -10,25 +10,29 @@ window.customElements.define('web-series-overview', webSeriesOverview);
 
 // MyWebSeries
 export class MyWebSeries extends LitElement {
+  static get properties() {
+    return {
+      card: { type: Array },
+    };
+  }
+
   constructor() {
     super();
-
-    this.title = 'my';
-    this.attachShadow({ mode: 'open' });
+    this.card = '';
   }
 
   // adding eventlistener to form element
-  connectedCallback() {
-    super.connectedCallback();
+  // connectedCallback() {
+  //   super.connectedCallback();
 
-    const child = document.querySelector('form');
-    child.addEventListener('form-submit', e => {
-      this.title = e.detail.title;
-      this.stars = e.detail.stars;
-      this.director = e.detail.director;
-      this.streamingPlatform = e.detail.streamingPlatform;
-    });
-  }
+  //   const child = document.querySelector('form');
+  //   child.addEventListener('form-submit', e => {
+  //     this.title = e.detail.title;
+  //     this.stars = e.detail.stars;
+  //     this.director = e.detail.director;
+  //     this.streamingPlatform = e.detail.streamingPlatform;
+  //   });
+  // }
 
   // adding styles
 
@@ -52,6 +56,11 @@ export class MyWebSeries extends LitElement {
     `;
   }
 
+  createCard(e) {
+    // console.log(e.detail);
+    this.card = [...this.card, e.detail];
+  }
+
   // adding my-tab in webseries
 
   render() {
@@ -59,16 +68,13 @@ export class MyWebSeries extends LitElement {
       <div class="container">
         <my-tab .selectedIndex=${1}>
           <button slot="tab">form</button>
-          <p slot="panel"><web-series-form></web-series-form></p>
+          <p slot="panel">
+            <web-series-form @addingcards=${this.createCard}></web-series-form>
+          </p>
 
           <button slot="tab">Overview</button>
           <p slot="panel">
-            <web-series-overview
-              title=${this.title}
-              director=${this.director}
-              stars=${this.stars}
-              streamingPlatform=${this.streamingPlatform}
-            ></web-series-overview>
+            <web-series-overview .card=${this.card}></web-series-overview>
           </p>
         </my-tab>
       </div>
