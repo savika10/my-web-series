@@ -53,6 +53,21 @@ export class MyWebSeries extends LitElement {
       my-tab {
         width: 100%;
       }
+      button:hover {
+        background-color: #74b0db;
+        color: #050404;
+      }
+      button {
+        margin: 5px;
+        background-color: #1b4f72;
+        color: white;
+        padding: 1.2rem 2rem;
+        border: solid 0.3px white;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        transition: background-color 1s;
+        transition: color 1s;
+      }
     `;
   }
 
@@ -66,13 +81,13 @@ export class MyWebSeries extends LitElement {
   render() {
     return html`
       <div class="container">
-        <my-tab .selectedIndex=${1}>
-          <button slot="tab">form</button>
+        <my-tab>
+          <button slot="tab">FORM</button>
           <p slot="panel">
             <web-series-form @addingcards=${this.createCard}></web-series-form>
           </p>
 
-          <button slot="tab">Overview</button>
+          <button slot="tab">OVERVIEW</button>
           <p slot="panel">
             <web-series-overview .card=${this.card}></web-series-overview>
           </p>

@@ -23,10 +23,9 @@ export class WebSeriesCard extends LitElement {
     return css`
       @media (min-width: 800px) {
         .flip-card {
-          background-color: rgb(255, 255, 255);
           width: auto;
           height: 100%;
-          border: 1px solid #f1f1f1;
+
           perspective: 500px;
           border: 0.1rem solid #1b4f72;
           overflow: hidden;
@@ -34,7 +33,7 @@ export class WebSeriesCard extends LitElement {
         .flip-card-inner {
           position: relative;
           text-align: center;
-          background-image: radial-gradient(circle, #d6eaf8, #3498db);
+          background-image: radial-gradient(circle, #d6eaf8, #579bc9);
           transition: transform 1s;
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
           transform-style: preserve-3d;
@@ -44,7 +43,7 @@ export class WebSeriesCard extends LitElement {
         .flip-card:hover .flip-card-inner {
           transform: rotateX(180deg);
           transition: transform 0.5s;
-          background: rgb(255, 255, 255);
+
           padding-top: none;
         }
 
@@ -71,6 +70,7 @@ export class WebSeriesCard extends LitElement {
           text-align: center;
           transform: rotateX(180deg);
           padding-top: none;
+          background-image: radial-gradient(circle, #d6eaf8, #579bc9);
         }
       }
       @media (max-width: 800px) {
@@ -83,10 +83,9 @@ export class WebSeriesCard extends LitElement {
           backface-visibility: hidden;
         }
         .flip-card {
-          background-color: rgb(255, 255, 255);
           width: auto;
           height: 100%;
-          border: 1px solid #f1f1f1;
+
           perspective: 500px;
           border: 0.1rem solid #1b4f72;
           overflow: hidden;
@@ -99,12 +98,11 @@ export class WebSeriesCard extends LitElement {
         .flip-card:hover .flip-card-inner {
           transform: rotateX(180deg);
           transition: transform 0.5s;
-          background: rgb(255, 255, 255);
         }
         .flip-card-inner {
           position: relative;
 
-          background-image: radial-gradient(circle, #d6eaf8, #3498db);
+          background-image: radial-gradient(circle, #d6eaf8, #579bc9);
           text-align: center;
           transition: transform 1s;
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -117,6 +115,7 @@ export class WebSeriesCard extends LitElement {
           text-align: center;
           transform: rotateX(180deg);
           padding-top: 10px;
+          background-image: radial-gradient(circle, #d6eaf8, #579bc9);
         }
       }
     `;
@@ -129,6 +128,7 @@ export class WebSeriesCard extends LitElement {
           <div class="flip-card-front">${this.title}</div>
           <div class="flip-card-back">
             <span>
+              <br />
               ${this.director}<br />
               ${this.stars}<br />
               ${this.streamingPlatform}<br />

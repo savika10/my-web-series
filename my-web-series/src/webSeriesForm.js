@@ -1,4 +1,13 @@
 import { LitElement, html, css } from '@lion/core';
+import '@lion/button/define';
+// eslint-disable-next-line import/no-unresolved
+import '@lion/select/define';
+// eslint-disable-next-line import/no-unresolved
+import '@lion/form/define';
+// eslint-disable-next-line import/no-unresolved
+import '@lion/input/define';
+import { loadDefaultFeedbackMessages } from '@lion/validate-messages';
+import { Required, IsString } from '@lion/form-core';
 
 export class webSeriesForm extends LitElement {
   // dispatching event
@@ -57,7 +66,7 @@ export class webSeriesForm extends LitElement {
         margin-bottom: 1.6rem;
         resize: vertical;
       }
-      .submit {
+      div {
         display: flex;
         flex-direction: row-reverse;
       }
@@ -80,6 +89,7 @@ export class webSeriesForm extends LitElement {
 
   addCard(e) {
     e.preventDefault();
+
     const title = this.shadowRoot.getElementById('title').value;
     const director = this.shadowRoot.getElementById('director').value;
     const stars = this.shadowRoot.getElementById('stars').value;
@@ -96,62 +106,87 @@ export class webSeriesForm extends LitElement {
     this.shadowRoot.getElementById('stars').value = null;
     this.shadowRoot.getElementById('streamingPlatform').value = null;
   }
+
   // form html
 
   render() {
+    loadDefaultFeedbackMessages();
+    Required.getMessage = () => '*All fields are mandatory';
+    IsString.getMessage = () => 'Numeric characters is not allowed';
+
     return html`
-      <form name="Myform" id="Web-series-form" class="container1">
-        <h4>
-          TITLE:
-          <input
-            id="title"
-            type="text"
-            name="name"
-            value=""
-            placeholder="Title Name"
-          />
-        </h4>
-        <h4>
-          DIRECTOR:
-          <input
-            id="director"
-            type="text"
-            name="name"
-            value=""
-            placeholder="Directors Name"
-          />
-        </h4>
-        <h4>
-          STARS:
-          <input
-            id="stars"
-            type="text"
-            name="name"
-            value=""
-            placeholder="Stars Name"
-          />
-        </h4>
-        <h4>
-          STREAMING PLATFORM:
-          <select id="streamingPlatform" name="streamingPlatformDropdown">
-            <option value="none">none</option>
-            <option value="Netflix">Netflix</option>
-            <option value="Prime">Prime</option>
-            <option value="Viki">Viki</option>
-            <option value="Hotstar">Hotstar</option>
-          </select>
-        </h4>
-        <h4 class="submit">
-          <button
+      <lion-form>
+        <form name="Myform" id="Web-series-form" class="container1">
+          <lion-fieldset name="lion-form">
+            <h4>
+            <lion-input
+              id="title"
+              type="text"
+              name="title name"
+              value=""
+              placeholder="Title Name"
+              label="TITLE:"  
+              
+              .parser="${viewValue => String(viewValue) || undefined}"
+              .validators="${[new Required(), new IsString()]}"
+              .modelValue=${''}
+              
+
+            ></lion-input>
+  </h4>
+            <h4>
+            <lion-input
+              id="director"
+              type="text"
+              name="director name"
+              value=""
+              placeholder="Directors Name"
+              label="DIRECTOR:"
+              .validators="${[new Required()]}"
+
+            ></lion-input>
+  </h4>
+  <h4>
+            <lion-input
+              id="stars"
+              type="text"
+              name="stars name"
+              value=""
+              placeholder="Stars Name"
+              label="STARS:"
+              .validators="${[new Required()]}"
+            ></lion-input>
+  </h4>
+          </lion-fieldset>
+          <h4>
+          <lion-select
+            label="STREAMING PLATFORM:"
+            id="streamingPlatform"
+            name="streamingPlatformDropdown"
+            .validators="${[new Required()]}"
+           >
+            <select slot="input">
+              <option value="Netflix">Netflix</option>
+              <option value="Prime">Prime</option>
+              <option value="Viki">Viki</option>
+              <option value="Hotstar">Hotstar</option>
+              .validators="${[new Required()]}"
+            </select>
+          </lion-select>
+          </h4>
+          <div class: "submit">
+          <lion-button-submit
+          
             type="submit"
             id="name"
             value="ADD"
             @click=${e => this.addCard(e)}
           >
             ADD
-          </button>
-        </h4>
-      </form>
+          </lion-button-submit>
+          </div>
+        </form>
+      </lion-form>
     `;
   }
 }
