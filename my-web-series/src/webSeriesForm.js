@@ -101,10 +101,10 @@ export class webSeriesForm extends LitElement {
       new CustomEvent('addingcards', { detail: cardcontainer })
     );
 
-    this.shadowRoot.getElementById('title').value = null;
-    this.shadowRoot.getElementById('director').value = null;
-    this.shadowRoot.getElementById('stars').value = null;
-    this.shadowRoot.getElementById('streamingPlatform').value = null;
+    // this.shadowRoot.getElementById('title').value = null;
+    // this.shadowRoot.getElementById('director').value = null;
+    // this.shadowRoot.getElementById('stars').value = null;
+    // this.shadowRoot.getElementById('streamingPlatform').value = null;
   }
 
   // form html
