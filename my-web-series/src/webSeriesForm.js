@@ -8,6 +8,7 @@ import '@lion/form/define';
 import '@lion/input/define';
 import { loadDefaultFeedbackMessages } from '@lion/validate-messages';
 import { Required, IsString } from '@lion/form-core';
+import { ajax } from '@lion/ajax';
 
 export class webSeriesForm extends LitElement {
   // dispatching event
@@ -107,13 +108,26 @@ export class webSeriesForm extends LitElement {
     // this.shadowRoot.getElementById('streamingPlatform').value = null;
   }
 
+  // fetchHandler = () => {
+  //   Ajax.fetchJson(`db.json`).then(result => {
+  //     console.log(result.response);
+  //   });
+  // };
+
   // form html
 
   render() {
     loadDefaultFeedbackMessages();
     Required.getMessage = () => '*All fields are mandatory';
     IsString.getMessage = () => 'Numeric characters is not allowed';
-
+    const fetchHandler = name => {
+      ajax
+        .fetch(`${name}.json`)
+        .then(cards => cards.json())
+        .then(result => {
+          console.log(result.cards);
+        });
+    };
     return html`
       <lion-form>
         <form name="Myform" id="Web-series-form" class="container1">
@@ -180,7 +194,8 @@ export class webSeriesForm extends LitElement {
             type="submit"
             id="name"
             value="ADD"
-            @click=${e => this.addCard(e)}
+            @click=${() => fetchHandler('db')}
+            
           >
             ADD
           </lion-button-submit>

@@ -7,8 +7,8 @@
   "scripts": {
     "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "test": "web-test-runner --coverage",
-    "test:watch": "web-test-runner --watch",
+    "json:server": "json-server --watch db.json",
+    "json:server:remote": "json-server http://localhost:8000/db.json",
     "storybook": "npm run analyze -- --exclude dist && web-dev-server -c .storybook/server.mjs",
     "storybook:build": "npm run analyze -- --exclude dist && build-storybook",
     "build": "rimraf dist && rollup -c rollup.config.js && npm run analyze -- --exclude dist",
@@ -17,6 +17,7 @@
     "start": "web-dev-server"
   },
   "dependencies": {
+    "@lion/ajax": "^1.0.0",
     "@lion/button": "^0.18.1",
     "@lion/core": "^0.24.0",
     "@lion/form": "^0.15.0",
@@ -26,6 +27,7 @@
     "@lion/tabs": "^0.13.1",
     "@lion/validate-messages": "^0.10.1",
     "@open-wc/scoped-elements": "^2.0.0-next.6",
+    "json-server": "^0.17.0",
     "lit": "^2.0.2"
   },
   "devDependencies": {
@@ -74,5 +76,9 @@
       "prettier --write"
     ]
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "main": "rollup.config.js",
+  "directories": {
+    "test": "test"
+  }
 }
