@@ -9,6 +9,7 @@ import '@lion/input/define';
 import { loadDefaultFeedbackMessages } from '@lion/validate-messages';
 import { Required, IsString } from '@lion/form-core';
 import { ajax } from '@lion/ajax';
+import { localize } from '@lion/localize';
 
 export class webSeriesForm extends LitElement {
   // dispatching event
@@ -20,6 +21,11 @@ export class webSeriesForm extends LitElement {
       streamingPlatform: { type: String },
     };
   }
+
+  // constructor() {
+  //   super();
+  //   updateWhenLocaleChanges(this);
+  // }
 
   // firstUpdated() {
   //   const shadow = this.shadowRoot;
@@ -117,6 +123,7 @@ export class webSeriesForm extends LitElement {
   // form html
 
   render() {
+    localize.locale = 'fr-BE';
     loadDefaultFeedbackMessages();
     Required.getMessage = () => '*All fields are mandatory';
     IsString.getMessage = () => 'Numeric characters is not allowed';
