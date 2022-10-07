@@ -152,15 +152,13 @@ export class webSeriesForm extends LocalizeMixin(LitElement) {
         <form name="Myform" id="Web-series-form" class="container1">
           <lion-fieldset name="lion-form">
             <h4>
+            <label slot="label">${localize.msg('my-web-series:title')}</label> 
             <lion-input
               id="title"
               type="text"
               name="title name"
               value=""
-              placeholder="Title Name"
-              <label slot="label">${localize.msg(
-                'my-web-series:title'
-              )}</label>  
+              placeholder="Title Name"           
               
               .parser="${viewValue => String(viewValue) || undefined}"
               .validators="${[new Required(), new IsString()]}"
@@ -170,32 +168,39 @@ export class webSeriesForm extends LocalizeMixin(LitElement) {
             ></lion-input>
   </h4>
             <h4>
+            <label slot="label">${localize.msg(
+              'my-web-series:director'
+            )}</label> 
             <lion-input
               id="director"
               type="text"
               name="director name"
               value=""
               placeholder="Directors Name"
-              label="DIRECTOR:"
+              
               .validators="${[new Required()]}"
 
             ></lion-input>
   </h4>
   <h4>
+  <label slot="label">${localize.msg('my-web-series:stars')}</label> 
             <lion-input
               id="stars"
               type="text"
               name="stars name"
               value=""
               placeholder="Stars Name"
-              label="STARS:"
+             
               .validators="${[new Required()]}"
             ></lion-input>
   </h4>
           </lion-fieldset>
           <h4>
+          <label slot="label">${localize.msg(
+            'my-web-series:streamingPlatform'
+          )}</label> 
           <lion-select
-            label="STREAMING PLATFORM:"
+            
             id="streamingPlatform"
             name="streamingPlatformDropdown"
             .validators="${[new Required()]}"
@@ -210,15 +215,16 @@ export class webSeriesForm extends LocalizeMixin(LitElement) {
           </lion-select>
           </h4>
           <div class: "submit">
+         
           <lion-button-submit
           
             type="submit"
             id="name"
-            value="ADD"
+            
             @click=${() => fetchHandler('db')}
             
           >
-            ADD
+          ${localize.msg('my-web-series:name')}
           </lion-button-submit>
           </div>
         </form>

@@ -3,4 +3,5 @@ export default {
   director: 'DIRECTOR:',
   stars: 'STARS:',
   streamingPlatform: 'STREAMING PLATFORM:',
+  name: 'ADD',
 };
