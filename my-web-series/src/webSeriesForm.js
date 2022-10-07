@@ -9,9 +9,9 @@ import '@lion/input/define';
 import { loadDefaultFeedbackMessages } from '@lion/validate-messages';
 import { Required, IsString } from '@lion/form-core';
 import { ajax } from '@lion/ajax';
-import { localize } from '@lion/localize';
+import { localize, LocalizeMixin } from '@lion/localize';
 
-export class webSeriesForm extends LitElement {
+export class webSeriesForm extends LocalizeMixin(LitElement) {
   // dispatching event
   static get properties() {
     return {
@@ -24,7 +24,6 @@ export class webSeriesForm extends LitElement {
 
   // constructor() {
   //   super();
-  //   updateWhenLocaleChanges(this);
   // }
 
   // firstUpdated() {
@@ -91,6 +90,21 @@ export class webSeriesForm extends LitElement {
         transition: background-color 1s;
         transition: color 1s;
       }
+      button:hover {
+        background-color: #74b0db;
+        color: #050404;
+      }
+      button {
+        background-color: #1b4f72; /* Green */
+        border: none;
+        color: white;
+        margin-top: 10px;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
     `;
   }
 
@@ -108,22 +122,20 @@ export class webSeriesForm extends LitElement {
       new CustomEvent('addingcards', { detail: cardcontainer })
     );
 
-    // this.shadowRoot.getElementById('title').value = null;
-    // this.shadowRoot.getElementById('director').value = null;
-    // this.shadowRoot.getElementById('stars').value = null;
-    // this.shadowRoot.getElementById('streamingPlatform').value = null;
+    this.shadowRoot.getElementById('title').value = '';
+    this.shadowRoot.getElementById('director').value = '';
+    this.shadowRoot.getElementById('stars').value = '';
+    this.shadowRoot.getElementById('streamingPlatform').value = '';
   }
 
-  // fetchHandler = () => {
-  //   Ajax.fetchJson(`db.json`).then(result => {
-  //     console.log(result.response);
-  //   });
-  // };
-
   // form html
-
+  static get localizeNamespaces() {
+    return [
+      { 'my-web-series': locale => import(`../src/translations/${locale}.js`) },
+      ...super.localizeNamespaces,
+    ];
+  }
   render() {
-    localize.locale = 'fr-BE';
     loadDefaultFeedbackMessages();
     Required.getMessage = () => '*All fields are mandatory';
     IsString.getMessage = () => 'Numeric characters is not allowed';
@@ -146,7 +158,9 @@ export class webSeriesForm extends LitElement {
               name="title name"
               value=""
               placeholder="Title Name"
-              label="TITLE:"  
+              <label slot="label">${localize.msg(
+                'my-web-series:title'
+              )}</label>  
               
               .parser="${viewValue => String(viewValue) || undefined}"
               .validators="${[new Required(), new IsString()]}"
@@ -209,6 +223,25 @@ export class webSeriesForm extends LitElement {
           </div>
         </form>
       </lion-form>
+      <button class="button" id="id1" @click="${this.first}" >ENGLISH</button>
+      <button class="button" id="id2" @click="${this.second}" >FRENCH</button>
+      <button class="button" id="id3" @click="${this.third}" >KOREAN</button>
+     
     `;
   }
+
+  first = () => {
+    localize.locale = 'en-GB';
+    console.log('ENGLISH');
+  };
+
+  second = () => {
+    localize.locale = 'fr-FR';
+    console.log('FRENCH');
+  };
+
+  third = () => {
+    localize.locale = 'ko-KR';
+    console.log('KOREAN');
+  };
 }
